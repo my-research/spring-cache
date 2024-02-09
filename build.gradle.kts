@@ -20,19 +20,27 @@ repositories {
 }
 
 dependencies {
+    // spring
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.springframework.boot:spring-boot-starter-cache")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
 
+    // caches
+    implementation("com.github.ben-manes.caffeine:caffeine:3.1.8")
+	implementation("org.springframework.boot:spring-boot-starter-cache")
+
+    // database
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("com.h2database:h2")
 
+    // kotlin
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
+
+    // test
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.6.2")
-
-    testImplementation("org.mockito:mockito-core:3.12.4")
     testImplementation("org.mockito.kotlin:mockito-kotlin:3.2.0")
+    testImplementation("org.mockito:mockito-core:3.12.4")
 }
 
 tasks.withType<KotlinCompile> {
