@@ -11,3 +11,9 @@ spring:
     hibernate:
       ddl-auto: create
     show-sql: true
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: beans,caches,metrics
