@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 class TodoEntryPoint(
-    private val repository: TodoRepository,
     private val commandService: TodoCommandService,
     private val queryService: TodoQueryService,
 ) {
@@ -27,7 +26,7 @@ class TodoEntryPoint(
     @PutMapping("/todos/{todoId}")
     fun update(@PathVariable todoId: Long, @RequestBody body: UpdateTodoStatusHttpRequest): ResponseEntity<Void> {
         commandService.transit(todoId, body.status)
-        return ResponseEntity.status(200).build()
+        return ResponseEntity.ok().build()
     }
 }
 

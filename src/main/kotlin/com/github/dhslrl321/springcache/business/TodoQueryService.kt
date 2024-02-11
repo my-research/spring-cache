@@ -15,7 +15,7 @@ class TodoQueryService(
      *
      * 조회와 동시에 userId 에 todo 들을 cache 에 저장합니다
      */
-    @Cacheable("todosByUserId")
+    @Cacheable(cacheNames = ["todosByUserId"])
     fun findAllBy(userId: Long): List<Todo> {
         SleepUtils.sleep()
         return repository.findAllByUserId(userId).toList()
