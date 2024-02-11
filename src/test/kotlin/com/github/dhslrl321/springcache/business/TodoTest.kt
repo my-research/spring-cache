@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test
 class TodoTest {
     @Test
     fun entityTest() {
-        val todo1 = Todo(1, userId = 99, "jang")
-        val todo2 = Todo(1, userId = 99, "kim")
+        val todo1 = Todo(userId = 99, "jang")
+        val todo2 = Todo(userId = 99, "kim")
 
         todo1 shouldBe todo2
         todo1.name shouldNotBe todo2.name

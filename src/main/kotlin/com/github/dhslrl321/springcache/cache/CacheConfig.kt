@@ -21,7 +21,7 @@ class CacheConfig {
     fun caffeine(): Caffeine<Any, Any>? {
         return Caffeine.newBuilder()
             .initialCapacity(10)
-            .expireAfterWrite(Duration.of(10, ChronoUnit.SECONDS))
+            .expireAfterWrite(Duration.of(100, ChronoUnit.SECONDS))
             .recordStats()
     }
 }
