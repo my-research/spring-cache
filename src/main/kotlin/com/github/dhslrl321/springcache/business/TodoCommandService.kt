@@ -1,15 +1,20 @@
 package com.github.dhslrl321.springcache.business
 
 import jakarta.transaction.Transactional
+import org.springframework.cache.Cache
+import org.springframework.cache.CacheManager
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.CachePut
 import org.springframework.cache.annotation.Caching
+import org.springframework.cache.interceptor.CacheAspectSupport
+import org.springframework.cache.interceptor.CacheResolver
 import org.springframework.cache.interceptor.KeyGenerator
 import org.springframework.stereotype.Service
 
 @Service
 class TodoCommandService(
     private val repository: TodoRepository,
+    private val cacheManager: CacheManager,
 ) {
     /**
      * userId 에 todo 하나를 생성합니다
@@ -45,12 +50,15 @@ class TodoCommandService(
      */
     @Caching(
         put = [CachePut(cacheNames = ["todoById"], key = "#todoId")],
-        evict = [CacheEvict(cacheNames = ["todosByUserId"], allEntries = true)]
+        // evict = [CacheEvict(cacheNames = ["todosByUserId"], allEntries = true)]
     )
     fun transit(todoId: Long, status: String): Todo {
 
         val todo = repository.findById(todoId).orElseThrow()
         todo.transitTo(TodoStatus.valueOf(status))
+
+        cacheManager.getCache("todosByUserId")
+            ?.evict(todo.userId)
 
         return repository.save(todo)
     }
