@@ -4,7 +4,7 @@ import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
-class TodoEntryPoint(
+class TodoController(
     private val commandService: TodoCommandService,
     private val queryService: TodoQueryService,
 ) {

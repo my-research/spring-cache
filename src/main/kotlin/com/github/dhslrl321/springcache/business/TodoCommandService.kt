@@ -50,7 +50,6 @@ class TodoCommandService(
      */
     @Caching(
         put = [CachePut(cacheNames = ["todoById"], key = "#todoId")],
-        // evict = [CacheEvict(cacheNames = ["todosByUserId"], allEntries = true)]
     )
     fun transit(todoId: Long, status: String): Todo {
 
